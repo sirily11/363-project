@@ -1,0 +1,22 @@
+version: "3"
+services:
+  jsp:
+    build: ./jsp
+    container_name: jsp-server
+    volumes:
+      - ./jsp/:/usr/local/tomcat/webapps/webapp
+    ports:
+      - 8080:8080
+    stdin_open: true
+    tty: true
+    privileged: true
+
+  mysql:
+    image: mysql
+    container_name: jsp-sql-server
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: "somepassword"
+    volumes:
+      - ./sql/db-storage:/var/lib/mysql
