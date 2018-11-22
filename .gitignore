@@ -7,6 +7,10 @@
 # BlueJ files
 *.ctxt
 
+*.idea
+
+*.lock
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
@@ -17,3 +21,4 @@
 */db-storage/*
 !*.md
 .DS_Store
+*/dist/*
