@@ -23,3 +23,7 @@
 .DS_Store
 */dist/*
 */build/*
+*.pkg
+*.toc
+*.zip
+*.pyz
