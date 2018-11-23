@@ -26,6 +26,7 @@ Linux/Mac OS
 sudo docker-compose up jsp
 sudo docker-compose up mysql
 ```
+
 > If you need to import the data into the database, you can try to use sudo docker-compose run import_data. Remember run this command after the running the commands above.
 
 Windows
@@ -50,3 +51,7 @@ Put everything under the jsp folder.
 > Local database's data
 
 Every data is under the sql/db-storage.
+
+## Warning
+
+If you using Docker for the sql server, make sure your host ip is mysql:3306, not localhost:3306 or something else. This is the default ip address for everything running inside the docker container. Same for the import python script.
