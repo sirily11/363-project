@@ -18,7 +18,7 @@ except Exception as e:
 def create_database():
     print("%s==============Creating Database===================%s" %
           (fg(13), attr(0)))
-    c.execute("DROP database project")
+    c.execute("DROP database if exists project ")
     c.execute("CREATE DATABASE if not exists project")
     cnx.database = "project"
     print("Created database")
