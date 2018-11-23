@@ -9,7 +9,6 @@ services:
       - 8080:8080
     stdin_open: true
     tty: true
-    privileged: true
 
   mysql:
     image: mysql
