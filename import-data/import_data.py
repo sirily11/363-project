@@ -6,7 +6,7 @@ import os
 
 try:
     cnx = mysql.connector.connect(user='root', password='somepassword',
-                                  host='127.0.0.1')
+                                  host='mysql')
     cnx.autocommit = False
     c = cnx.cursor()
     cwd = os.getcwd()
@@ -111,13 +111,13 @@ def normalize_value(value):
 
 
 def insert_mentioned():
-    filename = os.path.join(cwd, "COMS363CProjectData/tagged.csv")
+    filename = os.path.join(cwd, "COMS363CProjectData/mentioned.csv")
     normalize_csv(filename)
     mentioned = pandas.read_csv(filename)
     tids = [i for i in mentioned["tid"]]
     screen_names = [i for i in mentioned["screen_name"]]
 
-    success = False
+    success = True
 
     for i in tqdm(range(len(mentioned)), desc="mentioned table"):
         try:
@@ -129,6 +129,7 @@ def insert_mentioned():
         except Exception as e:
             print(
                 stylize(f"Error happens at {i} because {e}", fg(1)))
+            success = False
             break
     if success:
         cnx.commit()
@@ -145,7 +146,7 @@ def insert_tweets():
     posted = [i for i in tweets["posted"]]
     posting_user = [i for i in tweets["posting_user"]]
 
-    success = False
+    success = True
 
     for i in tqdm(range(len(tweets)), desc="tweets table"):
         try:
@@ -162,6 +163,7 @@ def insert_tweets():
         except Exception as e:
             print(
                 stylize(f"Error happens at {i} because {e}", fg(1)))
+            success = False
             break
 
     if success:
@@ -180,7 +182,7 @@ def insert_user():
     numFollowers = [normalize_value(i) for i in user["numFollowers"]]
     numFollowing = [normalize_value(i) for i in user["numFollowing"]]
 
-    success = False
+    success = True
 
     for i in tqdm(range(len(user)), desc="user table"):
         try:
@@ -200,6 +202,7 @@ def insert_user():
         except Exception as e:
             print(
                 stylize(f"Error happens at {i} because {e}", fg(1)))
+            success = False
             break
 
     if success:
@@ -212,7 +215,7 @@ def insert_tagged():
     user = pandas.read_csv(filename)
     tid = [normalize_value(i) for i in user["tid"]]
     hastagname = [normalize_value(i) for i in user["hastagname"]]
-    success = False
+    success = True
 
     for i in tqdm(range(len(user)), desc="tagged table"):
         try:
@@ -226,6 +229,7 @@ def insert_tagged():
         except Exception as e:
             print(
                 stylize(f"Error happens at {i} because {e}", fg(1)))
+            success = False
             break
     if success:
         cnx.commit()
@@ -237,7 +241,7 @@ def insert_urlused():
     user = pandas.read_csv(filename)
     tid = [normalize_value(i) for i in user["tid"]]
     url = [normalize_value(i) for i in user["url"]]
-    success = False
+    success = True
 
     for i in tqdm(range(len(user)), desc="url table"):
         try:
@@ -251,6 +255,7 @@ def insert_urlused():
         except Exception as e:
             print(
                 stylize(f"Error happens at {i} because {e}", fg(1)))
+            success = False
             break
     if success:
         cnx.commit()

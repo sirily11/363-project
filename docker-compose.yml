@@ -20,3 +20,11 @@ services:
       MYSQL_ROOT_PASSWORD: "somepassword"
     volumes:
       - ./sql/db-storage:/var/lib/mysql
+
+  import_data:
+    build: ./import-data
+    container_name: python_import_to_database
+    volumes:
+      - ./import-data/:/usr/local/app
+    stdin_open: true
+    tty: true
