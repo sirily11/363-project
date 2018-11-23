@@ -19,7 +19,6 @@
 *.nar
 *.ear
 */db-storage/*
-!*.md
 .DS_Store
 */dist/*
 */build/*
