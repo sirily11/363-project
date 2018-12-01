@@ -23,8 +23,8 @@ clone this repostory and then open a terminal in the project folder. If you on w
 Linux/Mac OS
 
 ```
-sudo docker-compose up jsp
-sudo docker-compose up mysql
+sudo docker-compose up -d jsp
+sudo docker-compose up -d mysql
 ```
 
 > If you need to import the data into the database, you can try to use sudo docker-compose run import_data. Remember run this command after the running the commands above.
@@ -32,8 +32,8 @@ sudo docker-compose up mysql
 Windows
 
 ```
-docker-compose up jsp
-docker-compose up mysql
+docker-compose up -d jsp
+docker-compose up -d mysql
 ```
 
 ### Step three
