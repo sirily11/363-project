@@ -2,7 +2,8 @@
 <%@ page import="java.util.LinkedList" %>
 <%@ page import="java.util.Arrays" %>
 <%
-    List<String> links = Arrays.asList("Query 1","Query 2");
+    List<String> titles = Arrays.asList("Query 1","Query 2");
+    List<String> links = Arrays.asList("queries/query1.jsp","queries/query2.jsp");
     List<String> descriptions = Arrays.asList(
             "Find k hashtags that appeared in the most number of states; show the total number of states\n" +
             "the hashtag appeared, distinct states it appeared, and the hashtag itself in descending order\n" +
