@@ -42,6 +42,22 @@ Open a web browser, then go to localhost:8080/webapp to see the helloworld page.
 
 > If you on Mac OS, you need to go to 0.0.0.0:8080/webapp to see the helloworld page.
 
+### Optional: Auto reload
+
+Run
+
+```
+pip install watchdog
+```
+
+then run
+
+```
+python auto_reload.py
+```
+
+to get hot reload function on docker.
+
 ## How to modify?
 
 > Update the page
