@@ -14,6 +14,12 @@ The docker-compose will automatically start a jsp server and a local database se
 
 ## Installation
 
+### Important
+Now you can use the latest GUI to start up the docket.
+Just click on the RunDocker.jar, then follow the instructions,
+the environment will be automatically set up for you.
+
+
 ### Step one
 
 clone this repostory and then open a terminal in the project folder. If you on windows, first insider the folder, then shift + right click, open a power shell. If you on Mac OS, right click the project, select service, open a terminal.
