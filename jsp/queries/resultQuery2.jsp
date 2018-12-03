@@ -20,57 +20,56 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="../index.jsp">Home</a></li>
-        <li class="breadcrumb-item"><a href="query1.jsp">Query1</a></li>
+        <li class="breadcrumb-item"><a href="query2.jsp">Query2</a></li>
         <li class="breadcrumb-item active" aria-current="page">Result</li>
     </ol>
 </nav>
-<table class="table table-bordered">
+<table class="table">
     <thead>
     <tr>
         <th scope="col">#</th>
-        <th scope="col">Hash Tag Name</th>
+        <th scope="col">Hash tag name</th>
+        <th scope="col">Screen Name</th>
+        <th scope="col">Category</th>
         <th scope="col">Total number</th>
-        <th scope="col">States</th>
     </tr>
     </thead>
     <tbody>
     <%
+        String hashtag = request.getParameter("hashtag");
+        int year = Integer.parseInt(request.getParameter("year"));
+        int month = Integer.parseInt(request.getParameter("month"));
+        String state = request.getParameter("state");
+        String username = request.getParameter("username");
         int number = Integer.parseInt(request.getParameter("numOfUsers"));
+
         //Make connection
         PreparedStatement stmt;
 
-        String sqlQuery ="SELECT hastagname,count(hastagname) as number FROM (\n" +
-                "  select distinct hastagname,ofstate from tweets\n" +
-                "    INNER join tagged t on tweets.tid = t.tid\n" +
-                "    INNER join user u on tweets.posting_user = u.screen_name\n" +
-                "  ) as table1\n" +
-                "group by hastagname\n" +
-                "order by number desc\n" +
-                "LIMIT ?;";
+        String sqlQuery ="select hastagname,user.screen_name,user.category,count(tagged.hastagname) as number FROM ((tweets\n" +
+                "  INNER JOIN user ON tweets.posting_user = user.screen_name)\n" +
+                "  INNER JOIN tagged ON tweets.tid = tagged.tid)\n" +
+                "where month(posted)=? and year(posted)=? " +
+                "and hastagname=? and ofstate=?" +
+                "  group by user.screen_name,user.category,hastagname\n" +
+                "order by number desc limit ?;";
         stmt = conn.prepareStatement(sqlQuery);
-        stmt.setInt(1,number);
+        stmt.setInt(1,month);
+        stmt.setInt(2,year);
+        stmt.setString(3,hashtag);
+        stmt.setString(4,state);
+        stmt.setInt(5,number);
         rs = stmt.executeQuery();
 
         int i = 1;
         //print
         while (rs.next()){
-            stmt = conn.prepareStatement("select distinct ofstate from tweets\n" +
-                    "  INNER join tagged t on tweets.tid = t.tid\n" +
-                    "  INNER join user u on tweets.posting_user = u.screen_name\n" +
-                    "where hastagname=?;");
-            stmt.setString(1,rs.getString(1));
-            ResultSet rs2 = stmt.executeQuery();
-            String result = "";
-
             out.println("<tr>");
             out.println("<th scope='row'>"+i+"</th>");
             out.println("<td>" + rs.getString(1) + "</td>");
-            out.println("<td>" + rs.getInt(2) + "</td>");
-
-            while (rs2.next()){
-                result += " " + rs2.getString(1);
-            }
-            out.println("<td>" + result + "</td>");
+            out.println("<td>" + rs.getString(2) + "</td>");
+            out.println("<td>" + rs.getString(3) + "</td>");
+            out.println("<td>" + rs.getInt(4) + "</td>");
             out.println("</tr>");
             i += 1;
         }

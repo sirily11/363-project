@@ -5,6 +5,7 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler, LoggingEventHandler
 import os
 import subprocess
+from selenium import webdriver
 
 
 class jspHandler(FileSystemEventHandler):
@@ -24,34 +25,46 @@ class jspHandler(FileSystemEventHandler):
             print(f"Error:{e} \n Did u start the docker compose?")
 
     def on_moved(self, event):
-        self.reload()
+        if ".jsp" in event.src_path:
+            self.reload()
 
     def on_created(self, event):
-        self.reload()
+        if ".jsp" in event.src_path:
+            self.reload()
 
     def on_deleted(self, event):
-        self.reload()
+        if ".jsp" in event.src_path:
+            self.reload()
 
     def on_modified(self, event):
-        self.reload()
+        if ".jsp" in event.src_path:
+            self.reload()
+
+
+def reload():
+    subprocess.check_call("docker-compose restart jsp", shell=True)
+    print("Hot reloading")
 
 
 def main():
-    logging.basicConfig(level=logging.INFO,
-                        format='%(asctime)s - %(message)s',
-                        datefmt='%Y-%m-%d %H:%M:%S')
-    path = os.path.join(os.getcwd(), "jsp")
-    print(path)
-    if "363-project" not in path:
-        Exception("Not in the project folder")
+    # logging.basicConfig(level=logging.INFO,
+    #                     format='%(asctime)s - %(message)s',
+    #                     datefmt='%Y-%m-%d %H:%M:%S')
+    # path = os.path.join(os.getcwd(), "jsp")
+    # print(path)
+    # if "363-project" not in path:
+    #     Exception("Not in the project folder")
 
-    event_handler = jspHandler()
-    observer = Observer()
-    observer.schedule(event_handler, path, recursive=True)
-    observer.start()
+    # event_handler = jspHandler()
+    # observer = Observer()
+    # observer.schedule(event_handler, path, recursive=True)
+    # observer.start()
+    # while True:
+    #     time.sleep(0.5)
+    # observer.join()
     while True:
-        time.sleep(1)
-    observer.join()
+        input("Reload? ")
+        reload()
 
 
 if __name__ == "__main__":
