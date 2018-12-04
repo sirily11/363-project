@@ -51,7 +51,7 @@
             </select>
         </div>
         <div class="form-group">
-            <label>Category for posting</label>
+            <span>Category for posting</span>
             <select name="category-p" class="custom-select col-3">
                 <%
                     Statement statement;

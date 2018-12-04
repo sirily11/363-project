@@ -13,7 +13,8 @@
 <%@ include file="../DBInfo.jsp" %>
 <html>
 <head>
-    <link rel="stylesheet" href="../static/css/material-kit.min.css" ><script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    <link rel="stylesheet" href="../static/css/material-kit.min.css" >
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
             integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
             crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -26,11 +27,11 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="../index.jsp">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Query2</li>
+        <li class="breadcrumb-item active" aria-current="page">Query9</li>
     </ol>
 </nav>
 <div class="container-fluid">
-    <form method="post" action="resultQuery2.jsp">
+    <form method="post" action="resultQuery9.jsp">
         <div class="form-group">
             <span>Month</span>
             <select name="month" class="custom-select col-3">
@@ -48,20 +49,22 @@
                     }
                 %>
             </select>
-            <span>States</span>
-            <select name="state" class="custom-select col-3">
+        </div>
+        <div class="form-group">
+            <span>Sub-category for mentioned user</span>
+            <select name="sub-category" class="custom-select col-3">
                 <%
                     Statement statement;
                     statement = conn.createStatement();
-                    ResultSet states = statement.executeQuery("select distinct ofstate from user;\n");
-
+                    ResultSet states = statement.executeQuery("select distinct sub_category from user;\n");
+                    String html = "";
                     while (states.next()) {
-                        out.println("<option value=" + states.getString(1) + ">" + states.getString(1) + "</option>");
+                        html += "<option value=" + states.getString(1) + ">" + states.getString(1) + "</option>\n";
                     }
+                    out.println(html);
                 %>
             </select>
         </div>
-
         <div class="form-group">
             <span>Num users</span>
             <select name="numOfUsers" class="custom-select col-3">
@@ -71,47 +74,9 @@
                     }
                 %>
             </select>
-            <div class="input-group col-7 ui-widget">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">Hashtag</span>
-                </div>
-                <input id="tags" type="text" class="form-control" placeholder="Hash Tag"
-                       aria-label="hashtag"
-                       aria-describedby="basic-addon1"
-                       name="hashtag"
-                >
-                <button type="submit" class="btn btn-primary">Get</button>
-            </div>
+            <button type="submit" class="btn btn-primary">Get</button>
         </div>
     </form>
 </div>
 </body>
-<script>
-    $(function () {
-        let availableTags = [<%=getTags(conn).toString()%>];
-        let users = [<%=getUsers(conn).toString()%>];
-        $("#tags").autocomplete({
-            source: function (request, response) {
-                var results = $.ui.autocomplete.filter(availableTags, request.term);
-                response(results.slice(0, 10));
-            },
-            messages: {
-                noResults: '',
-                results: function () {
-                }
-            },
-        });
-        $("#users").autocomplete({
-            source: function (request, response) {
-                var results = $.ui.autocomplete.filter(users, request.term);
-                response(results.slice(0, 10));
-            },
-            messages: {
-                noResults: '',
-                results: function () {
-                }
-            },
-        });
-    });
-</script>
 </html>

@@ -23,7 +23,7 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="../index.jsp">Home</a></li>
-        <li class="breadcrumb-item"><a href="query8.jsp">Query8</a></li>
+        <li class="breadcrumb-item"><a href="query9.jsp">Query9</a></li>
         <li class="breadcrumb-item active" aria-current="page">Result</li>
     </ol>
 </nav>
@@ -31,27 +31,25 @@
     <%
         int year = Integer.parseInt(request.getParameter("year"));
         int month = Integer.parseInt(request.getParameter("month"));
-        String categoryP = request.getParameter("category-p");
-        String categoryM = request.getParameter("category-m");
+        String subCategory = request.getParameter("sub-category");
         int number = Integer.parseInt(request.getParameter("numOfUsers"));
 
         //Make connection
         PreparedStatement stmt;
 
         String sqlQuery ="select textbody,m.screen_name as mentioned,u.screen_name as posting from tweets\n" +
-                "   INNER join user u on tweets.posting_user = u.screen_name\n" +
-                "   INNER join (select tid,m2.screen_name,u2.category from user u2\n" +
-                "                inner join mentioned m2 on u2.screen_name = m2.screen_name\n" +
-                "                where u2.category=?\n" +
-                "               ) as m on tweets.tid = m.tid\n" +
-                "where month(posted)=? and year(posted)=? and u.category=?\n " +
-                "limit ?";
+                "INNER join user u on tweets.posting_user = u.screen_name\n" +
+                "INNER join (select tid,m2.screen_name,u2.sub_category from user u2\n" +
+                "            inner join mentioned m2 on u2.screen_name = m2.screen_name\n" +
+                "            where u2.sub_category=?\n" +
+                "  ) as m on tweets.tid = m.tid\n" +
+                "where month(posted)=? and year(posted)=?\n" +
+                "limit ?;";
         stmt = conn.prepareStatement(sqlQuery);
-        stmt.setString(1,categoryM);
+        stmt.setString(1,subCategory);
         stmt.setInt(2,month);
         stmt.setInt(3,year);
-        stmt.setString(4,categoryP);
-        stmt.setInt(5,number);
+        stmt.setInt(4,number);
         rs = stmt.executeQuery();
         int i = 0;
         //print

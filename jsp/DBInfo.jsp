@@ -13,6 +13,7 @@
     Connection conn;
     ResultSet rs;
     conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+    conn.setAutoCommit(false);
 
 
 

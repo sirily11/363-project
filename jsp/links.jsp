@@ -3,10 +3,10 @@
 <%@ page import="java.util.Arrays" %>
 <%
     List<String> titles = Arrays.asList("Query 1","Query 2","Query 3",
-            "Query 4","Query 5","Query 6","Query 7","Query 8");
+            "Query 4","Query 5","Query 6","Query 7","Query 8","Query 9","Query 10");
     List<String> links = Arrays.asList("queries/query1.jsp","queries/query2.jsp",
             "queries/query3.jsp","queries/query4.jsp","queries/query5.jsp","queries/query6.jsp",
-            "queries/query7.jsp","queries/query8.jsp");
+            "queries/query7.jsp","queries/query8.jsp","queries/query9.jsp","queries/query10.jsp");
     List<String> descriptions = Arrays.asList(
             "Find k hashtags that appeared in the most number of states; show the total number of states\n" +
             "the hashtag appeared, distinct states it appeared, and the hashtag itself in descending order\n" +
@@ -36,7 +36,13 @@
 
             "Find k users in a given category mentioned in tweets posted by users in a given category in a\n" +
             "given month of a given year. Show tweet text, user’s name and the user mentioned in the\n" +
-            "tweet for a given category of users mentioned"
+            "tweet for a given category of users mentioned",
+
+            "Show k tweet text, user name and the user mentioned in the tweet of a given s u b - category\n" +
+            "of the user mentioned in a given month of a given year",
+
+            "Insert information of a new user into the database. The program asks for all the relevant attribute\n" +
+            "values. "
             );
 
 %>

@@ -31,7 +31,7 @@
 </nav>
 <div class="container-fluid">
     <form method="post" action="resultQuery3.jsp">
-        <div class="row">
+        <div class="form-group">
             <span>Month</span>
             <select name="month" class="custom-select col-3">
                 <%
@@ -62,7 +62,7 @@
             </select>
         </div>
 
-        <div class="row">
+        <div class="form-group">
             <span>Num users</span>
             <select name="numOfUsers" class="custom-select col-3">
                 <%
