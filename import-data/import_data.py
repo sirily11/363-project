@@ -5,8 +5,22 @@ from colored import fg, bg, attr, stylize
 import os
 
 try:
-    cnx = mysql.connector.connect(user='root', password='somepassword',
-                                  host='mysql')
+    url1 = "cs363-liqiwei.misc.iastate.edu"
+    url2 = "mysql"
+    password1 = "123456"
+    password2 = "somepassword"
+    user1 = 'hosseini'
+    user2 = 'root'
+
+    selection = input("Which database you want to use? Press 1 for remote, press 2 for local? ")
+    if selection == '1':
+      cnx = mysql.connector.connect(user=user1, password=password1,
+                                  host=url1)
+      print("You are using the remote one")
+    if selection == '2':
+      cnx = mysql.connector.connect(user=user2, password=password2,
+                                  host=url2)
+      print("You are using the local one")
     cnx.autocommit = False
     c = cnx.cursor()
     cwd = os.getcwd()
