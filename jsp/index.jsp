@@ -21,7 +21,7 @@
 
         <%
             for(int i = 0;i < links.size();i++){
-                out.println("<div class='card col-4'>");
+                out.println("<div class='card col-md-4'>");
                 out.println("<div class='card-body'>");
                 out.println("<div class='card-title'>" + titles.get(i) + "</div>");
                 out.println("<p class='card-text'>" + descriptions.get(i) + "</p>");
