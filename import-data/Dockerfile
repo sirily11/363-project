@@ -1,4 +1,4 @@
-FROM python:3.6-slim
+FROM armhf/python:3.6
 # RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 # RUN python get-pip.py
 WORKDIR /usr/local/app
