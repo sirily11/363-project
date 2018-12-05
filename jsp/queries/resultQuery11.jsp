@@ -38,41 +38,41 @@
         //Make connection
         PreparedStatement stmt;
 
-        String sqlQuery ="select textbody,m.screen_name as mentioned,u.screen_name as posting from tweets\n" +
+        String sqlQuery ="select distinct tweets.textbody,t.hastagname,u.screen_name,u.sub_category from tweets\n" +
+                "   INNER join tagged t on tweets.tid = t.tid\n" +
                 "   INNER join user u on tweets.posting_user = u.screen_name\n" +
-                "   INNER join (select tid,m2.screen_name,u2.category from user u2\n" +
-                "                inner join mentioned m2 on u2.screen_name = m2.screen_name\n" +
-                "                where u2.category=?\n" +
-                "               ) as m on tweets.tid = m.tid\n" +
-                "where month(posted)=? and year(posted)=? and u.category=?\n " +
-                "limit ?";
+                "where u.sub_category='GOP' or u.sub_category='democrat'\n" +
+                "and month(posted)=? and year(posted)=? and ofstate=?\n" +
+                "LIMIT ?;";
         stmt = conn.prepareStatement(sqlQuery);
-        stmt.setString(1,categoryM);
-        stmt.setInt(2,month);
-        stmt.setInt(3,year);
-        stmt.setString(4,categoryP);
-        stmt.setInt(5,number);
+        stmt.setInt(1,month);
+        stmt.setInt(2,year);
+        stmt.setString(3,state);
+        stmt.setInt(4,number);
         rs = stmt.executeQuery();
         int i = 0;
         //print
         while (rs.next()){
             String textbody = rs.getString(1);
-            String mUser = rs.getString(2);
+            String hashtag = rs.getString(2);
             String pUser = rs.getString(3);
+            String category = rs.getString(4);
             if(i % 2 == 0){
                 out.println("<span>" + (i+1) + "</span>");
                 out.println("<div class='card text-white bg-info col-md-8'>");
                 out.println("<div class='card-body'>");
+                out.println("<h5 class='card-category card-category-social'> #" + hashtag + " </h5>");
                 out.println("<h4 class='card-title'>" + textbody + "</h4>");
-                out.println("<div class='card-stats'> From: " + pUser + "<br> Mentioned: " + mUser + "</div>");
+                out.println("<div class='card-stats'> From: " + pUser + "---" + category +"</div>");
                 out.println("</div>");
                 out.println("</div>");
             }else{
                 out.println("<span>" + (i+1) + "</span>");
-                out.println("<div class='card col-md-8 offset-md-4'>");
+                out.println("<div class='card col-md-8 offset-4'>");
                 out.println("<div class='card-body'>");
+                out.println("<h5 class='card-category card-category-social'> #" + hashtag + " </h5>");
                 out.println("<h4 class='card-title'>" + textbody + "</h4>");
-                out.println("<div class='card-stats'> From: " + pUser + "<br> Mentioned: " + mUser + "</div>");
+                out.println("<div class='card-stats'> From: " + pUser + "---" + category +"</div>");
                 out.println("</div>");
                 out.println("</div>");
             }

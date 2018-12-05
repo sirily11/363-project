@@ -5,6 +5,7 @@ RUN pip install numpy
 WORKDIR /usr/temp
 RUN git clone https://github.com/pandas-dev/pandas.git
 WORKDIR /usr/temp/pandas
+RUN pip install cython
 RUN python setup.py install
 RUN pip install tqdm
 RUN pip install mysql-connector-python

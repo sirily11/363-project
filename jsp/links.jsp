@@ -45,7 +45,9 @@
             "Insert information of a new user into the database. The program asks for all the relevant attribute\n" +
             "values. ",
 
-            "Extra credit: Find k tweets with hashtags posted by republican..."
+            "Extra credit: Find k tweets with hashtags posted by republican...",
+
+            "Extra credit: Find k hashtags and tweets in which that hashtags were posted"
             );
 
 %>
