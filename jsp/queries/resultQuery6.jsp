@@ -27,7 +27,7 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="../index.jsp">Home</a></li>
-        <li class="breadcrumb-item"><a href="query6.jsp">Query6</a></li>
+        <li class="breadcrumb-item"><a href="query6.jsp">Q19</a></li>
         <li class="breadcrumb-item active" aria-current="page">Result</li>
     </ol>
 </nav>

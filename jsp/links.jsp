@@ -2,8 +2,8 @@
 <%@ page import="java.util.LinkedList" %>
 <%@ page import="java.util.Arrays" %>
 <%
-    List<String> titles = Arrays.asList("Query 1","Query 2","Query 3",
-            "Query 4","Query 5","Query 6","Query 7","Query 8","Query 9","Query 10");
+    List<String> titles = Arrays.asList("Q3","Q7","Q10",
+            "Q15","Q16","Q19","Q22","Q25","Q26","Import");
     List<String> links = Arrays.asList("queries/query1.jsp","queries/query2.jsp",
             "queries/query3.jsp","queries/query4.jsp","queries/query5.jsp","queries/query6.jsp",
             "queries/query7.jsp","queries/query8.jsp","queries/query9.jsp","queries/query10.jsp");
