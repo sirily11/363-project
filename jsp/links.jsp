@@ -3,11 +3,11 @@
 <%@ page import="java.util.Arrays" %>
 <%
     List<String> titles = Arrays.asList("Q3","Q7","Q10",
-            "Q15","Q16","Q19","Q22","Q25","Q26","Import","Q11");
+            "Q15","Q16","Q19","Q22","Q25","Q26","Import","Q11","Q12");
     List<String> links = Arrays.asList("queries/query1.jsp","queries/query2.jsp",
             "queries/query3.jsp","queries/query4.jsp","queries/query5.jsp","queries/query6.jsp",
             "queries/query7.jsp","queries/query8.jsp","queries/query9.jsp","queries/query10.jsp",
-            "queries/query11.jsp");
+            "queries/query11.jsp","queries/query12.jsp");
     List<String> descriptions = Arrays.asList(
             "Find k hashtags that appeared in the most number of states; show the total number of states\n" +
             "the hashtag appeared, distinct states it appeared, and the hashtag itself in descending order\n" +
@@ -47,7 +47,7 @@
 
             "Extra credit: Find k tweets with hashtags posted by republican...",
 
-            "Extra credit: Find k hashtags and tweets in which that hashtags were posted"
+            "Extra credit: Find k hashtags and tweets in which that hashtags were posted..."
             );
 
 %>

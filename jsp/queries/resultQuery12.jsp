@@ -15,7 +15,9 @@
     <link rel="stylesheet" href="../static/css/material-kit.min.css" >
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>\
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
 </head>
 <body>
 <style>
@@ -24,7 +26,7 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="../index.jsp">Home</a></li>
-        <li class="breadcrumb-item"><a href="query11.jsp">Q11</a></li>
+        <li class="breadcrumb-item"><a href="query12.jsp">Q12</a></li>
         <li class="breadcrumb-item active" aria-current="page">Result</li>
     </ol>
 </nav>
@@ -38,11 +40,11 @@
         //Make connection
         PreparedStatement stmt;
 
-        String sqlQuery ="select tweets.textbody,t.hastagname,u.screen_name,u.sub_category from tweets\n" +
+        String sqlQuery ="select tweets.textbody,t.hastagname,u.screen_name,retweet_count from tweets\n" +
                 "   INNER join tagged t on tweets.tid = t.tid\n" +
                 "   INNER join user u on tweets.posting_user = u.screen_name\n" +
-                "where u.sub_category='GOP' or u.sub_category='democrat'\n" +
-                "and month(posted)=? and year(posted)=? and ofstate=?\n" +
+                "where month(posted)=? and year(posted)=? and ofstate=?\n" +
+                "order by retweet_count desc\n" +
                 "LIMIT ?;";
         stmt = conn.prepareStatement(sqlQuery);
         stmt.setInt(1,month);
@@ -56,14 +58,18 @@
             String textbody = rs.getString(1);
             String hashtag = rs.getString(2);
             String pUser = rs.getString(3);
-            String category = rs.getString(4);
+            int retweetCount = rs.getInt(4);
             if(i % 2 == 0){
                 out.println("<span>" + (i+1) + "</span>");
                 out.println("<div class='card text-white bg-info col-md-8'>");
                 out.println("<div class='card-body'>");
                 out.println("<h5 class='card-category card-category-social'> #" + hashtag + " </h5>");
                 out.println("<h4 class='card-title'>" + textbody + "</h4>");
-                out.println("<div class='card-stats'> From: " + pUser + "---" + category +"</div>");
+                out.println("<div class='card-stats'> From: " + pUser);
+                out.println("<div class='stats ml-auto'> Retweet:");
+                out.println("<i class=\"material-icons\">share</i>" + retweetCount);
+                out.println("</div>");
+                out.println("</div>");
                 out.println("</div>");
                 out.println("</div>");
             }else{
@@ -72,7 +78,11 @@
                 out.println("<div class='card-body'>");
                 out.println("<h5 class='card-category card-category-social'> #" + hashtag + " </h5>");
                 out.println("<h4 class='card-title'>" + textbody + "</h4>");
-                out.println("<div class='card-stats'> From: " + pUser + "---" + category +"</div>");
+                out.println("<div class='card-stats'> From: " + pUser);
+                out.println("<div class='stats ml-auto'> Retweet:");
+                out.println("<i class=\"material-icons\">share</i>" + retweetCount);
+                out.println("</div>");
+                out.println("</div>");
                 out.println("</div>");
                 out.println("</div>");
             }

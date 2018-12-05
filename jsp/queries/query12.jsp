@@ -27,11 +27,11 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="../index.jsp">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Q11</li>
+        <li class="breadcrumb-item active" aria-current="page">Q12</li>
     </ol>
 </nav>
 <div class="container-fluid">
-    <form method="post" action="resultQuery11.jsp">
+    <form method="post" action="resultQuery12.jsp">
         <div class="form-group">
             <span>Month</span>
             <select name="month" class="custom-select col-3">
