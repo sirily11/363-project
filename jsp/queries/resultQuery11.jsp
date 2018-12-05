@@ -32,8 +32,7 @@
     <%
         int year = Integer.parseInt(request.getParameter("year"));
         int month = Integer.parseInt(request.getParameter("month"));
-        String categoryP = request.getParameter("category-p");
-        String categoryM = request.getParameter("category-m");
+        String state = request.getParameter("state");
         int number = Integer.parseInt(request.getParameter("numOfUsers"));
 
         //Make connection

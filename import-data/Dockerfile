@@ -1,6 +1,7 @@
 FROM resin/raspberrypi3-alpine-python:3.6
 # RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 # RUN python get-pip.py
+RUN pip install numpy
 WORKDIR /usr/temp
 RUN git clone https://github.com/pandas-dev/pandas.git
 WORKDIR /usr/temp/pandas
