@@ -3,7 +3,7 @@ FROM resin/raspberrypi3-alpine-python:3.6
 # RUN python get-pip.py
 WORKDIR /usr/temp
 RUN git clone https://github.com/pandas-dev/pandas.git
-WORKDIR /user/temp/pandas
+WORKDIR /usr/temp/pandas
 RUN python setup.py install
 RUN pip install tqdm
 RUN pip install mysql-connector-python
