@@ -16,14 +16,7 @@
     Connection conn;
     ResultSet rs;
 
-    try {
-        conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
-        conn.setAutoCommit(false);
-    } catch (SQLException e) {
-        out.println("Cannot connect to the Database");
-    }
-
-
-
+    conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+    conn.setAutoCommit(false);
 
 %>
