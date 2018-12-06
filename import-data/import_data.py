@@ -61,7 +61,8 @@ def create_table_tweets():
               "retweet_count integer,"
               "retweeted integer,"
               "posted timestamp,"
-              "posting_user varchar(255))")
+              "posting_user varchar(255),"
+              "FOREIGN KEY (posting_user) references user(screen_name) )")
     print("Created table tweets ")
 
 
@@ -81,15 +82,16 @@ def create_table_user():
               "category varchar(255),"
               "ofstate varchar(20),"
               "numFollowers integer,"
-              "numFollowing integer )")
+              "numFollowing integer)")
     print("Created table user ")
-
+    c.execute("CREATE Index userIDX on user(ofstate,category)")
+    print("Created index on user table")
 
 def create_tables():
     print("%s==============Creating Tables===================%s" %
           (fg(13), attr(0)))
-    create_table_tweets()
     create_table_user()
+    create_table_tweets()
     create_table_mentioned()
     create_table_tagged()
     create_table_urlused()
