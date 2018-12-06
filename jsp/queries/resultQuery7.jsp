@@ -57,37 +57,44 @@
                 "group by hastagname\n" +
                 "order by number desc \n " +
                 "LIMIT ?;";
-        stmt = conn.prepareStatement(sqlQuery);
-        stmt.setInt(1, month);
-        stmt.setInt(2, year);
-        stmt.setString(3, category);
-        stmt.setInt(4, number);
-        rs = stmt.executeQuery();
-
-        int i = 1;
-        //print
-        while (rs.next()) {
-            ResultSet rs2;
-            String listHtml = "";
-            sqlQuery = "select distinct u.ofstate from tweets\n" +
-                    "INNER join tagged t on tweets.tid = t.tid\n" +
-                    "INNER join user u on tweets.posting_user = u.screen_name\n" +
-                    "where t.hastagname=?;";
+        try {
             stmt = conn.prepareStatement(sqlQuery);
-            stmt.setString(1, rs.getString(1));
-            rs2 = stmt.executeQuery();
-            while (rs2.next()) {
-                listHtml += "<li>" + rs2.getString(1) + "</li>";
-            }
+            stmt.setInt(1, month);
+            stmt.setInt(2, year);
+            stmt.setString(3, category);
+            stmt.setInt(4, number);
+            rs = stmt.executeQuery();
 
-            out.println("<tr>");
-            out.println("<th scope='row'>" + i + "</th>");
-            out.println("<td>" + rs.getString(1) + "</td>");
-            out.println("<td>" + rs.getInt(2) + "</td>");
-            out.println("<td><ul>" + listHtml + "</ul></td>");
-            out.println("</tr>");
-            i += 1;
+            int i = 1;
+            //print
+            while (rs.next()) {
+                ResultSet rs2;
+                String listHtml = "";
+                sqlQuery = "select distinct u.ofstate from tweets\n" +
+                        "INNER join tagged t on tweets.tid = t.tid\n" +
+                        "INNER join user u on tweets.posting_user = u.screen_name\n" +
+                        "where t.hastagname=?;";
+                stmt = conn.prepareStatement(sqlQuery);
+                stmt.setString(1, rs.getString(1));
+                rs2 = stmt.executeQuery();
+                while (rs2.next()) {
+                    listHtml += "<li>" + rs2.getString(1) + "</li>";
+                }
+
+                out.println("<tr>");
+                out.println("<th scope='row'>" + i + "</th>");
+                out.println("<td>" + rs.getString(1) + "</td>");
+                out.println("<td>" + rs.getInt(2) + "</td>");
+                out.println("<td><ul>" + listHtml + "</ul></td>");
+                out.println("</tr>");
+                i += 1;
+            }
+        } catch (SQLException e) {
+            out.println("<div class=\"alert alert-primary\" role=\"alert\">\n" +
+                    "  Some error happened when do the query\n" +
+                    "</div>");
         }
+
 
     %>
     </tbody>

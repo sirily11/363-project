@@ -57,24 +57,30 @@
                 "order by retweet_count desc\n" +
                 "limit ?\n" +
                 ";";
-        stmt = conn.prepareStatement(sqlQuery);
-        stmt.setInt(1, number);
-        rs = stmt.executeQuery();
+        try {
+            stmt = conn.prepareStatement(sqlQuery);
+            stmt.setInt(1, number);
+            rs = stmt.executeQuery();
 
-        int i = 1;
-        //print
-        while (rs.next()) {
-            out.println("<tr>");
-            out.println("<th scope='row'>" + i + "</th>");
-            out.println("<td>" + rs.getString(1) + "</td>");
-            out.println("<td>" + rs.getString(2) + "</td>");
-            out.println("<td>" + rs.getString(3) + "</td>");
-            out.println("<td>" + rs.getString(4) + "</td>");
-            out.println("<td>" + rs.getString(5) + "</td>");
-            out.println("<td>" + rs.getInt(6) + "</td>");
-            out.println("</tr>");
-            i += 1;
-        }
+            int i = 1;
+            //print
+            while (rs.next()) {
+                out.println("<tr>");
+                out.println("<th scope='row'>" + i + "</th>");
+                out.println("<td>" + rs.getString(1) + "</td>");
+                out.println("<td>" + rs.getString(2) + "</td>");
+                out.println("<td>" + rs.getString(3) + "</td>");
+                out.println("<td>" + rs.getString(4) + "</td>");
+                out.println("<td>" + rs.getString(5) + "</td>");
+                out.println("<td>" + rs.getInt(6) + "</td>");
+                out.println("</tr>");
+                i += 1;
+            }
+        } catch (SQLException e) {
+            out.println("<div class=\"alert alert-primary\" role=\"alert\">\n" +
+                    "  Some error happened when do the query\n" +
+                    "</div>");
+
 
     %>
     </tbody>

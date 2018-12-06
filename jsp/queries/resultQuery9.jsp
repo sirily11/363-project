@@ -46,38 +46,45 @@
                 "  ) as m on tweets.tid = m.tid\n" +
                 "where month(posted)=? and year(posted)=?\n" +
                 "limit ?;";
-        stmt = conn.prepareStatement(sqlQuery);
-        stmt.setString(1,subCategory);
-        stmt.setInt(2,month);
-        stmt.setInt(3,year);
-        stmt.setInt(4,number);
-        rs = stmt.executeQuery();
-        int i = 0;
-        //print
-        while (rs.next()){
-            String textbody = rs.getString(1);
-            String mUser = rs.getString(2);
-            String pUser = rs.getString(3);
-            if(i % 2 == 0){
-                out.println("<span>" + (i+1) + "</span>");
-                out.println("<div class='card text-white bg-info col-md-8'>");
-                out.println("<div class='card-body'>");
-                out.println("<h4 class='card-title'>" + textbody + "</h4>");
-                out.println("<div class='card-stats'> From: " + pUser + "<br> Mentioned: " + mUser + "</div>");
-                out.println("</div>");
-                out.println("</div>");
-            }else{
-                out.println("<span>" + (i+1) + "</span>");
-                out.println("<div class='card col-md-8 offset-md-4'>");
-                out.println("<div class='card-body'>");
-                out.println("<h4 class='card-title'>" + textbody + "</h4>");
-                out.println("<div class='card-stats'> From: " + pUser + "<br> Mentioned: " + mUser + "</div>");
-                out.println("</div>");
-                out.println("</div>");
-            }
-            i += 1;
+        try {
+            stmt = conn.prepareStatement(sqlQuery);
+            stmt.setString(1,subCategory);
+            stmt.setInt(2,month);
+            stmt.setInt(3,year);
+            stmt.setInt(4,number);
+            rs = stmt.executeQuery();
+            int i = 0;
+            //print
+            while (rs.next()){
+                String textbody = rs.getString(1);
+                String mUser = rs.getString(2);
+                String pUser = rs.getString(3);
+                if(i % 2 == 0){
+                    out.println("<span>" + (i+1) + "</span>");
+                    out.println("<div class='card text-white bg-info col-md-8'>");
+                    out.println("<div class='card-body'>");
+                    out.println("<h4 class='card-title'>" + textbody + "</h4>");
+                    out.println("<div class='card-stats'> From: " + pUser + "<br> Mentioned: " + mUser + "</div>");
+                    out.println("</div>");
+                    out.println("</div>");
+                }else{
+                    out.println("<span>" + (i+1) + "</span>");
+                    out.println("<div class='card col-md-8 offset-md-4'>");
+                    out.println("<div class='card-body'>");
+                    out.println("<h4 class='card-title'>" + textbody + "</h4>");
+                    out.println("<div class='card-stats'> From: " + pUser + "<br> Mentioned: " + mUser + "</div>");
+                    out.println("</div>");
+                    out.println("</div>");
+                }
+                i += 1;
 
+            }
+        } catch (SQLException e) {
+            out.println("<div class=\"alert alert-primary\" role=\"alert\">\n" +
+                    "  Some error happened when do the query\n" +
+                    "</div>");
         }
+
     %>
 </div>
 </body>

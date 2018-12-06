@@ -58,25 +58,32 @@
                 "where month(posted)=? and year(posted)=? and category=?\n" +
                 "order by posted desc\n" +
                 "limit ?;";
-        stmt = conn.prepareStatement(sqlQuery);
-        stmt.setInt(1, month);
-        stmt.setInt(2, year);
-        stmt.setString(3, category);
-        stmt.setInt(4, number);
-        rs = stmt.executeQuery();
+        try {
+            stmt = conn.prepareStatement(sqlQuery);
+            stmt.setInt(1, month);
+            stmt.setInt(2, year);
+            stmt.setString(3, category);
+            stmt.setInt(4, number);
+            rs = stmt.executeQuery();
 
-        int i = 1;
-        //print
-        while (rs.next()) {
-            out.println("<tr>");
-            out.println("<th scope='row'>" + i + "</th>");
-            out.println("<td>" + rs.getString(1) + "</td>");
-            out.println("<td>" + rs.getString(2) + "</td>");
-            out.println("<td>" + rs.getString(3) + "</td>");
-            out.println("<td>" + rs.getString(4) + "</td>");
-            out.println("</tr>");
-            i += 1;
+            int i = 1;
+            //print
+            while (rs.next()) {
+                out.println("<tr>");
+                out.println("<th scope='row'>" + i + "</th>");
+                out.println("<td>" + rs.getString(1) + "</td>");
+                out.println("<td>" + rs.getString(2) + "</td>");
+                out.println("<td>" + rs.getString(3) + "</td>");
+                out.println("<td>" + rs.getString(4) + "</td>");
+                out.println("</tr>");
+                i += 1;
+            }
+        } catch (SQLException e) {
+            out.println("<div class=\"alert alert-primary\" role=\"alert\">\n" +
+                    "  Some error happened when do the query\n" +
+                    "</div>");
         }
+
 
     %>
     </tbody>

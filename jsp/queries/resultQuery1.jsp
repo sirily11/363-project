@@ -47,33 +47,40 @@
                 "group by hastagname\n" +
                 "order by number desc\n" +
                 "LIMIT ?;";
-        stmt = conn.prepareStatement(sqlQuery);
-        stmt.setInt(1,number);
-        rs = stmt.executeQuery();
+        try {
+            stmt = conn.prepareStatement(sqlQuery);
+            stmt.setInt(1,number);
+            rs = stmt.executeQuery();
 
-        int i = 1;
-        //print
-        while (rs.next()){
-            stmt = conn.prepareStatement("select distinct ofstate from tweets\n" +
-                    "  INNER join tagged t on tweets.tid = t.tid\n" +
-                    "  INNER join user u on tweets.posting_user = u.screen_name\n" +
-                    "where hastagname=?;");
-            stmt.setString(1,rs.getString(1));
-            ResultSet rs2 = stmt.executeQuery();
-            String result = "";
+            int i = 1;
+            //print
+            while (rs.next()){
+                stmt = conn.prepareStatement("select distinct ofstate from tweets\n" +
+                        "  INNER join tagged t on tweets.tid = t.tid\n" +
+                        "  INNER join user u on tweets.posting_user = u.screen_name\n" +
+                        "where hastagname=?;");
+                stmt.setString(1,rs.getString(1));
+                ResultSet rs2 = stmt.executeQuery();
+                String result = "";
 
-            out.println("<tr>");
-            out.println("<th scope='row'>"+i+"</th>");
-            out.println("<td>" + rs.getString(1) + "</td>");
-            out.println("<td>" + rs.getInt(2) + "</td>");
+                out.println("<tr>");
+                out.println("<th scope='row'>"+i+"</th>");
+                out.println("<td>" + rs.getString(1) + "</td>");
+                out.println("<td>" + rs.getInt(2) + "</td>");
 
-            while (rs2.next()){
-                result += " " + rs2.getString(1);
+                while (rs2.next()){
+                    result += " " + rs2.getString(1);
+                }
+                out.println("<td>" + result + "</td>");
+                out.println("</tr>");
+                i += 1;
             }
-            out.println("<td>" + result + "</td>");
-            out.println("</tr>");
-            i += 1;
+        } catch (SQLException e) {
+           out.println("<div class=\"alert alert-primary\" role=\"alert\">\n" +
+                   "  Some error happened when do the query\n" +
+                   "</div>");
         }
+
 
     %>
     </tbody>

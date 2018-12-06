@@ -46,49 +46,56 @@
                 "where month(posted)=? and year(posted)=? and ofstate=?\n" +
                 "order by retweet_count desc\n" +
                 "LIMIT ?;";
-        stmt = conn.prepareStatement(sqlQuery);
-        stmt.setInt(1,month);
-        stmt.setInt(2,year);
-        stmt.setString(3,state);
-        stmt.setInt(4,number);
-        rs = stmt.executeQuery();
-        int i = 0;
-        //print
-        while (rs.next()){
-            String textbody = rs.getString(1);
-            String hashtag = rs.getString(2);
-            String pUser = rs.getString(3);
-            int retweetCount = rs.getInt(4);
-            if(i % 2 == 0){
-                out.println("<span>" + (i+1) + "</span>");
-                out.println("<div class='card text-white bg-info col-md-8'>");
-                out.println("<div class='card-body'>");
-                out.println("<h5 class='card-category card-category-social'> #" + hashtag + " </h5>");
-                out.println("<h4 class='card-title'>" + textbody + "</h4>");
-                out.println("<div class='card-stats'> From: " + pUser);
-                out.println("<div class='stats ml-auto'> Retweet:");
-                out.println("<i class=\"material-icons\">share</i>" + retweetCount);
-                out.println("</div>");
-                out.println("</div>");
-                out.println("</div>");
-                out.println("</div>");
-            }else{
-                out.println("<span>" + (i+1) + "</span>");
-                out.println("<div class='card col-md-8 offset-4'>");
-                out.println("<div class='card-body'>");
-                out.println("<h5 class='card-category card-category-social'> #" + hashtag + " </h5>");
-                out.println("<h4 class='card-title'>" + textbody + "</h4>");
-                out.println("<div class='card-stats'> From: " + pUser);
-                out.println("<div class='stats ml-auto'> Retweet:");
-                out.println("<i class=\"material-icons\">share</i>" + retweetCount);
-                out.println("</div>");
-                out.println("</div>");
-                out.println("</div>");
-                out.println("</div>");
-            }
-            i += 1;
+        try {
+            stmt = conn.prepareStatement(sqlQuery);
+            stmt.setInt(1,month);
+            stmt.setInt(2,year);
+            stmt.setString(3,state);
+            stmt.setInt(4,number);
+            rs = stmt.executeQuery();
+            int i = 0;
+            //print
+            while (rs.next()){
+                String textbody = rs.getString(1);
+                String hashtag = rs.getString(2);
+                String pUser = rs.getString(3);
+                int retweetCount = rs.getInt(4);
+                if(i % 2 == 0){
+                    out.println("<span>" + (i+1) + "</span>");
+                    out.println("<div class='card text-white bg-info col-md-8'>");
+                    out.println("<div class='card-body'>");
+                    out.println("<h5 class='card-category card-category-social'> #" + hashtag + " </h5>");
+                    out.println("<h4 class='card-title'>" + textbody + "</h4>");
+                    out.println("<div class='card-stats'> From: " + pUser);
+                    out.println("<div class='stats ml-auto'> Retweet:");
+                    out.println("<i class=\"material-icons\">share</i>" + retweetCount);
+                    out.println("</div>");
+                    out.println("</div>");
+                    out.println("</div>");
+                    out.println("</div>");
+                }else{
+                    out.println("<span>" + (i+1) + "</span>");
+                    out.println("<div class='card col-md-8 offset-4'>");
+                    out.println("<div class='card-body'>");
+                    out.println("<h5 class='card-category card-category-social'> #" + hashtag + " </h5>");
+                    out.println("<h4 class='card-title'>" + textbody + "</h4>");
+                    out.println("<div class='card-stats'> From: " + pUser);
+                    out.println("<div class='stats ml-auto'> Retweet:");
+                    out.println("<i class=\"material-icons\">share</i>" + retweetCount);
+                    out.println("</div>");
+                    out.println("</div>");
+                    out.println("</div>");
+                    out.println("</div>");
+                }
+                i += 1;
 
+            }
+        } catch (SQLException e) {
+            out.println("<div class=\"alert alert-primary\" role=\"alert\">\n" +
+                    "  Some error happened when do the query\n" +
+                    "</div>");
         }
+
     %>
 </div>
 </body>
