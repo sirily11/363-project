@@ -22,26 +22,21 @@
         <a class="nav-link" href="code.jsp">Import script</a>
     </li>
 </ul>
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">Home</li>
-    </ol>
-</nav>
-<div class="container-fluid">
-    <div class="row">
-
-        <%
-            for(int i = 0;i < links.size();i++){
-                out.println("<div class='card col-md-4'>");
-                out.println("<div class='card-body'>");
-                out.println("<div class='card-title'>" + titles.get(i) + "</div>");
-                out.println("<p class='card-text'>" + descriptions.get(i) + "</p>");
-                out.println("<a href="+ links.get(i)  + " class='btn btn-primary'>" + "Go" + "</a>");
-                out.println("</div>");
-                out.println("</div>");
-            }
-
-        %>
+<div class="card card-blog">
+    <div class="card-header card-header-image">
+        <img class="img" src="ER_diagram.png">
+        <div class="card-title text-warning">
+            ER diagram for the Database
+        </div>
+    </div>
+    <div class="card-body">
+        <h6 class="text-info">Description</h6>
+        <p class="card-description">
+            The database uses index on 'ofstate' attr and 'category' attr.
+            The database create script is under the import-data folder.
+        </p>
     </div>
 </div>
+
+
 </body>
