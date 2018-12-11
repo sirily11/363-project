@@ -54,11 +54,54 @@ docker-compose up -d jsp
 docker-compose up -d mysql
 ```
 
+import data
+```
+docker-compose run import_data
+```
+
+
+
 ### Step three
 
 Open a web browser, then go to localhost:8080/webapp to see the helloworld page.
 
 > If you on Mac OS, you need to go to 0.0.0.0:8080/webapp to see the helloworld page.
+
+
+## If you not using docker
+
+## Step 1
+First install python3.6 or higher, put everything under the jsp folder to your tomcat webapps/webapp folder
+
+## Step 2
+Open a terminal in your import-data folder
+On windows:
+Run
+```
+pip install pandas
+pip install tqdm
+pip install mysql-connector-python
+pip install colored
+```
+On Mac:
+```
+pip3 install pandas
+pip3 install tqdm
+pip3 install mysql-connector-python
+pip3 install colored
+```
+
+## Step3
+On windows
+Run
+```
+python import_data.py
+```
+On Mac:
+```
+python import_data.py
+```
+
 
 ### Optional: Auto reload
 

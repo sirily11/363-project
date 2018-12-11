@@ -1,0 +1,10 @@
+Week of December 3, 2018
+
+Andrew and Qiwei - Met for an hour, talked about design of database, setup including docker, other
+odds and ends like IDE usage, query optimization
+
+Andrew - Setup docker for usage with mysql, imported data, Designed ER diagram based off import scripts
+
+Week of December 10, 2018
+
+Andrew - Revised SQL scripts, prepped for submission
