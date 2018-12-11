@@ -1,0 +1,19 @@
+11/23
+
+Created github repository 
+
+11/24
+
+Created import script, docker container, as well as jsp configuration
+
+12/01
+
+Created templates for query 1 to 10 as well as result query 1 - 10
+
+12/03
+
+Added stylesheet to the jsp, makes the page better
+
+12/04
+
+uploaded the running version to VM as well as AWS. Added mobile support.

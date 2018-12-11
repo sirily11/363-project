@@ -1,0 +1,11 @@
+12/01
+We have a team meeting for the discussion of how the database should look like.
+
+12/03
+We talk about the jsp file's issues and as well as the importing
+
+12/04
+Discuss the index we need to use for the database.
+
+12/10
+We review all the jsp files and quries, then fixed the bugs we have
