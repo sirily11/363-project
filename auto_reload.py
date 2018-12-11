@@ -44,7 +44,7 @@ class jspHandler(FileSystemEventHandler):
 def reload():
     subprocess.check_call("docker-compose restart jsp", shell=True)
     print("Hot reloading")
-
+ 
 
 def main():
     # logging.basicConfig(level=logging.INFO,
@@ -64,7 +64,7 @@ def main():
     # observer.join()
     while True:
         input("Reload? ")
-        reload()
+        reload()  
 
 
 if __name__ == "__main__":

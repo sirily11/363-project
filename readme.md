@@ -8,6 +8,18 @@ Requirements:
 
 > If you install Docker on Windows or Mac, docker compose will be installed with your docker.
 
+## ER Diagram
+
+![diagram](jsp/ER_diagram.png)
+
+## Data import script
+
+The data import script is under the import-data folder
+
+## What's more!
+
+You can check the running version of the the webapp: http://ec2-18-206-39-47.compute-1.amazonaws.com:8080/webapp/
+
 ## What's included?
 
 The docker-compose will automatically start a jsp server and a local database server. Everything you need will be automatically created for you.
@@ -15,10 +27,10 @@ The docker-compose will automatically start a jsp server and a local database se
 ## Installation
 
 ### Important
+
 Now you can use the latest GUI to start up the docket.
 Just click on the RunDocker.jar, then follow the instructions,
 the environment will be automatically set up for you.
-
 
 ### Step one
 
